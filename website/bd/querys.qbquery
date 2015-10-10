@@ -1,0 +1,2 @@
+--
+insert into flats (address, photo, capacity, occupation, price, description, sex_filter) values
