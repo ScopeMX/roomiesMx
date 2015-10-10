@@ -46,11 +46,32 @@ users.prototype.loginUser = function(data, callback){
         })
 }
 
-users.prototype.completeUser = function(){
+users.prototype.setTypeUser = function(data, callback){
         var client = new pg.Client(stringConnection)
         client.connect()
 
-        var query = client.query("INSERT INTO ")
+        var query = client.query("UPDATE users SET type = $1 WHERE id_provider = $2;", [data.type, data.provider]);
+
+        query.on('row', function(row){})
+
+        query.on('end', function(){
+                callback({})
+                client.end()
+        })
+}
+
+users.prototype.completeUser = function(data, callback){
+        var client = new pg.Client(stringConnection)
+        client.connect()
+
+        var query = client.query("UPDATE users SET email = $1, phone = $2, school = $3, complete = $4; WHERE id_provider = $5", [data.email, data.phone, data.school, true, data.idprovider])
+
+        query.on('row', function(row){})
+
+        query.on('end', function(){
+                callback({})
+                client.end()
+        })
 }
 
 users.prototype.getUser = function(data, callback){
@@ -79,6 +100,8 @@ users.prototype.getUser = function(data, callback){
                 }
         })
 }
+
+
 
 
 
