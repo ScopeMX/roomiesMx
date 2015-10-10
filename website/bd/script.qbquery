@@ -36,6 +36,12 @@ create table schools(
 	place_id varchar(100) not null
 );
 
+create table photos(
+	id_photo serial primary key,
+	id_flat int not null,
+	address varchar(150) not null
+);
+
 -- Tabla para guardar la relación entre prestador y depa.
 create table lender_flat(
 	id_lender int not null,
@@ -48,11 +54,9 @@ create table student_flat(
 	id_flat int not null
 );
 
---
-create table photos(
-	id_photo serial primary key,
+-- Tabla que relaciona los depas y las escuelas cercanas.
+create table flat_school(
 	id_flat int not null,
-	address varchar(150) not null
+	id_school int not null
 );
-
 	

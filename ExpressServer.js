@@ -34,11 +34,11 @@ var ExpressServer = function(config){
 	this.expressServer.get('/auth/facebook', passport.authenticate('facebook'));
 	// si se logra loggear lo manda al origen, sino al login
 	this.expressServer.get('/auth/twitter/callback', passport.authenticate('twitter',
-  { successRedirect: '/users/index', failureRedirect: '/users/login' }
+  { successRedirect: '/users/main', failureRedirect: '/users/login' }
 	));
 	// si se logra loggear lo manda al origen, sino al login
 	this.expressServer.get('/auth/facebook/callback', passport.authenticate('facebook',
-  { successRedirect: '/users/index', failureRedirect: '/users/login' }
+  { successRedirect: '/users/main', failureRedirect: '/users/login' }
 	));
 
 	this.expressServer.get('/logout', function(req, res) {
