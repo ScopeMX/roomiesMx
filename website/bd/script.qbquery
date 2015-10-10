@@ -34,8 +34,7 @@
 create table schools(
 	id_school int primary key auto_increment,
 	name varchar(100) not null,
-	lat varchar(100) not null,
-	long varchar(100) not null
+	adress varchar(100) not null
 );
 
 -- Tabla para guardar la relación entre prestador y depa.
