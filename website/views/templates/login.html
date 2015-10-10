@@ -14,10 +14,10 @@
       <link rel="stylesheet" href="../stylesheets/materialize.css" type='text/css'/>
       <link href='http://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'/>
 
-      <link rel="shortcut icon" href="images/logo.png"/>
+      <link rel="shortcut icon" href="../images/logo.png"/>
 
-      <script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
-      <script type="text/javascript" src="../js/materialize.js"></script>
+      <script type="text/javascript" src="../static/js/jquery-2.1.4.min.js"></script>
+      <script type="text/javascript" src="../static/js/materialize.js"></script>
       <script type="text/javascript" src="../js/materialize.min.js"></script>
       <script type="text/javascript" src="../js/roomies.js"></script>
   </head>
@@ -26,12 +26,6 @@
     <nav class = "light-blue">
         <div class="nav-wrapper">
           <a href="#" class="brand-logo">&nbsp;&nbsp;&nbsp;&nbsp;Login</a>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <!-- li><a href="/users/login">Inicio de Sesión</a></li-->
-            <li><a href="login.html"></a></li>
-            <li><a href="badges.html">Departamentos</a></li>
-            <li><a href="collapsible.html">Perfil</a></li>
-          </ul>
         </div>
       </nav>
 
@@ -41,19 +35,11 @@
       <br>
       &nbsp;<img src = "../img/facebook.png" alt = "facebook"/>
       <br>
-      <a class="waves-effect waves-light btn-large indigo darken-4 ">Facebook</a>
+      <a class="waves-effect waves-light btn-large indigo darken-4 " href="/auth/facebook">Facebook</a>
       <br><br><br>
       <img src = "../img/twitter.png" alt = "twitter" />
       <br>
-      <a href="" class="waves-effect waves-light btn-large blue"> Twitter </a>
-
-
-
-
-      <!--<figure class="">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3762.0460796607877!2d-99.17519700000001!3d19.453580000000002!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f8bd9777a765%3A0x57501a5479751d18!2sCentro+de+Estudios+Cient%C3%ADficos+y+Tecnol%C3%B3gicos+No.+9+Juan+de+Dios+B%C3%A1tiz+Paredes!5e0!3m2!1ses!2s!4v1396413031095" width="600" height="450" frameborder="0" style="border:0"></iframe>
-      </figure> -->
-
+      <a class="waves-effect waves-light btn-large blue" href="/auth/twiiter"> Twitter </a>
 
         <footer class="page-footer black">
           <div class="container">
@@ -81,8 +67,6 @@
           </div>
         </footer>
         </center>
-
-
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
   </body>
