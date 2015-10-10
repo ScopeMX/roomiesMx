@@ -141,22 +141,14 @@ users.prototype.insertFlat = function(data, callback){
         query.on('end', function(){
                 var idUsr = 0;
                 if(!existe){
-                        var getId = client.query("SELECT COALESCE(MAX(id_user), 0) FROM users;")
+                        var insertar = client.query("INSERT INTO flats(id_user, id_provider, provider, name, type, photo, phone, email, complete, id_school) values()",
+                        [idUsr, data.id, data.provider, data.name, 0, data.photo, "", "", false, 0])
 
-                        getId.on('row', function(row){
-                                idUsr = row.coalesce + 1
-                        })
+                        insertar.on('row', function(row){})
 
-                        getId.on('end', function(){
-                                var insertar = client.query("INSERT INTO users(id_user, id_provider, provider, name, type, photo, phone, email, complete, id_school) values()",
-                                [idUsr, data.id, data.provider, data.name, 0, data.photo, "", "", false, 0])
-
-                                insertar.on('row', function(row){})
-
-                                insertar.on('end', function(){
-                                        callback(null, data)
-                                        client.end()
-                                })
+                        insertar.on('end', function(){
+                                callback(null, data)
+                                client.end()
                         })
                 }
                 else{

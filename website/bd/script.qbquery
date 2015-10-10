@@ -5,7 +5,6 @@
  	id_flat serial primary key not null,
  	adress varchar(100) not null,
  	--Dirección escrita
- 	photos varchar(100) not null,
  	capacity int not null default 1,
  	occupation int not null default 0,
  	price float not null,
@@ -34,7 +33,7 @@
 create table schools(
 	id_school serial primary key ,
 	name varchar(100) not null,
-	adress varchar(100) not null
+	place_id varchar(100) not null
 );
 
 -- Tabla para guardar la relación entre prestador y depa.
@@ -50,6 +49,10 @@ create table student_flat(
 );
 
 --
+create table photos(
+	id_photo serial primary key,
+	id_flat int not null,
 
+);
 
 	
