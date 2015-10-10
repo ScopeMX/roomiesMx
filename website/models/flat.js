@@ -53,6 +53,9 @@ flats.prototype.getAllFlats = function(data, callback){
         })
 
         query.on('end', function(){
+
+                
+
                 callback(response);
                 client.end();
         })
