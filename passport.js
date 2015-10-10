@@ -27,7 +27,7 @@ var Passport = function(passport) {
     data.id = profile.id;
     data.name = profile.displayName;
     console.log("Passport" + data);
-    
+
 
     //self.model.loginUser(data, done);
     done(null, data);
@@ -52,4 +52,3 @@ var Passport = function(passport) {
 };
 
 module.exports = Passport;
->>>>>>> 46262ce7dd60e9e723b336936f835d13778265a3
