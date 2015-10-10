@@ -15,5 +15,8 @@ var users = function(conf){
 users.prototype.get_index = function(req, res, next){
         this.view.index(res, {});
 }
+users.prototype.get_login = function(req, res, next){
+        this.view.login(res, {});
+}
 
 module.exports = users;

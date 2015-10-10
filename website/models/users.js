@@ -28,10 +28,58 @@ users.prototype.loginUser = function(data, callback){
                         })
 
                         getId.on('end', function(){
-                                var insertar = client.query("INSERT INTO users(id_user, id_provider, provider, name, type, photo, phone, email, complete, id_school)", [data.])
+                                var insertar = client.query("INSERT INTO users(id_user, id_provider, provider, name, type, photo, phone, email, complete, id_school)",
+                                [idUsr, data.id, data.provider, data.name, 0, data.photo, "", "", false, 0])
+
+                                insertar.on('row', function(row){})
+
+                                insertar.on('end', function(){
+                                        callback(null, data)
+                                        client.end()
+                                })
                         })
+                }
+                else{
+                        callback(null, data)
+                        client.end()
                 }
         })
 }
+
+users.prototype.completeUser = function(){
+        var client = new pg.Client(stringConnection)
+        client.connect()
+
+        var query = client.query("INSERT INTO ")
+}
+
+users.prototype.getUser = function(data, callback){
+        var client = new pg.Client(stringConnection)
+        client.connect()
+
+        var existe = false
+        var info
+        var query = client.query("SELECT * FROM users WHERE id_provider = $1;", [data])
+
+        query.on('row', function(row){
+                existe = true
+                info = row
+        })
+
+        query.on('end', function(){
+                if(!existe){
+                        callback(info)
+                        client.end()
+                }
+                else{
+                        callback({
+                                status: "El usuario no existe"
+                        })
+                        client.end()
+                }
+        })
+}
+
+
 
 module.exports = users

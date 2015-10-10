@@ -1,67 +1,49 @@
-var twitterStrategy = require('passport-twitter').Strategy;
-var facebookStrategy = require('passport-facebook').Strategy;
-var confLogin = require('./configLogin');
-var passport = require('passport');
-var pg = require('pg');
-var conf = require('./conf');
+var TwitterStrategy = require('passport-twitter').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 
-//muy bien, estas funciones son estandares
-module.exports = function(passport){
-        //serializa al usuario para ponerlo en la sesion
-        passport.serializeUser(function(user, done){
-                done(null, user);
-        });
+var config = require('./config');
+var UserModel = require('./website/models/users');
 
-        //deserializa al usuario para poder utilizarlo
-        passport.deserializeUser(function(obj, done){
-                done(null, obj);
-        });
+var Passport = function(passport) {
+  this.model = new UserModel();
 
-        passport.use(new twitterStrategy({
-                consumerKey: confLogin.twitter.key,
-                consumerSecret: confLogin.twitter.secret,
-                callbackURL: '/auth/loginTwitterAuth'
-        },function(accessToken, refreshToken, profile, done){
-                //el objeto profile es el que trae todos los datos
-                //en este caso solo vamos a poner el profile.displayName que es el nombre de usuario
-                console.log(profile);
+	passport.serializeUser(function(user, done) {
+		done(null, user);
+	});
 
-                var client = new pg.Client(process.env.DATABASE_URL || conf.dataBase.url);
-                var idUsr = 0;
+	passport.deserializeUser(function(obj, done) {
+		done(null, obj);
+	});
 
-                client.connect();
-                var query = client.query('SELECT COALESCE(MAX(idusers), 0) FROM users;');
+  var self = this;
+	passport.use(new TwitterStrategy({
+		consumerKey		 : config.twitter.key,
+		consumerSecret	: config.twitter.secret,
+		callbackURL		 : '/auth/twitter/callback'
+	}, function(accessToken, refreshToken, profile, done) {
+    var data = {};
+    data.provider profile.provider;
+    data.photo = profile.photos[0].value;
+    data.id = profile.id;
+    data.name = profile.displayName;
+    self.model.loginUser(data, done);
+	}));
 
-                query.on('row', function(row){
-                        idUsr = row.coalesce + 1;
-                });
+	passport.use(new FacebookStrategy({
+		clientID			: config.facebook.id,
+		clientSecret	: config.facebook.secret,
+		callbackURL	 : '/auth/facebook/callback',
+		profileFields : ['id', 'displayName', 'photos']
+	}, function(accessToken, refreshToken, profile, done) {
+    var data = {};
+    data.photo = profile.photos[0].value;
+    data.id = profile.id;
+    data.name = profile.displayName;
+    profile.provider = "facebook";
 
-                query.on('end', function(){
-                        var insertar = client.query('INSERT INTO users(idusers, name, provider, providerid, photo, createdat) VALUES ($1, $2, $3, $4, $5, $6)',
-                                [idUsr, profile.username, 1, profile.id, profile._json.profile_image_url, null]);
+		self.model.loginUser(data, done);
+	}));
+};
 
-                        insertar.on('end', function(){
-                                client.end();
-                        })
-                });
-
-                return done(null, {
-                        name: profile.displayName
-                })
-        }));
-
-        passport.use(new facebookStrategy({
-                clientID: confLogin.facebook.key,
-                clientSecret: confLogin.facebook.secret,
-                callbackURL: '/auth/loginFacebookAuth',
-                profileFields: ['id', 'displayName', 'name', 'photos', 'profileUrl']
-        },function(accessToken, refreshToken, profile, done){
-                console.log('si logueo');
-                console.log(profile.displayName);
-                console.log(profile._json.picture.data.url);
-                console.log(profile);
-                return done(null, {
-                        name: profile.displayName
-                })
-        }));
-}
+module.exports = Passport;
+>>>>>>> 46262ce7dd60e9e723b336936f835d13778265a3
