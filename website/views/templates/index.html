@@ -11,14 +11,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 
-  <link rel="stylesheet" href="../../../static/stylesheets/normalize.css" type='text/css'/>
-  <link rel="stylesheet" href="../../../static/stylesheets/materialize.css" type='text/css'/>
+  <link rel="stylesheet" href="../stylesheets/normalize.css" type='text/css'/>
+  <link rel="stylesheet" href="../stylesheets/materialize.css" type='text/css'/>
   <link href='http://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'/>
 
   <link rel="shortcut icon" href="images/logo.png"/>
 
-  <script type="text/javascript" src="../../../static/js/"></script>
-  <script type="text/javascript" src="../../../static/js/"></script>
+  <script type="text/javascript" src="/static/js/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="/static/js/materialize.js"></script>
+  <script type="text/javascript" src="/static/js/materialize.min.js"></script>
+  <script type="text/javascript" src="/static/js/roomies.js"></script>
 </head>
 <body>
 <nav>
@@ -33,8 +35,27 @@
   </nav>
 <!--Body-->
 
+	<!--Parallax-->
+   <div class="parallax-container">
+      <div class="parallax"><img src="../../../static/img/landscape.jpg"></div>
+    </div>
+
 <section class="body_landing">
-	ddsakldjslka
+	
+  <div class="card">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src="images/office.jpg">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+      <p><a href="#">This is a link</a></p>
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+      <p>Here is some more information about this product that is only revealed once clicked on.</p>
+    </div>
+  </div>
+         
 </section>
 <!--FOOTER-->
     <footer class="page-footer">
