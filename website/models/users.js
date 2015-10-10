@@ -105,4 +105,67 @@ users.prototype.getUser = function(data, callback){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Aquí empiezan las funciones de Elioth :)
+/*users.prototype.insetFlat = function(data, callback){
+        var client = new pg.Client(stringConnection)
+        client.connect()
+
+        var existe = false;
+
+        var query = client.query("SELECT * FROM users WHERE id_provider = $1;", [data.providerid])
+
+        query.on('row', function(row){
+                existe = true
+        })
+
+        query.on('end', function(){
+                var idUsr = 0;
+                if(!existe){
+                        var getId = client.query("SELECT COALESCE(MAX(id_user), 0) FROM users;")
+
+                        getId.on('row', function(row){
+                                idUsr = row.coalesce + 1
+                        })
+
+                        getId.on('end', function(){
+                                var insertar = client.query("INSERT INTO users(id_user, id_provider, provider, name, type, photo, phone, email, complete, id_school) values()",
+                                [idUsr, data.id, data.provider, data.name, 0, data.photo, "", "", false, 0])
+
+                                insertar.on('row', function(row){})
+
+                                insertar.on('end', function(){
+                                        callback(null, data)
+                                        client.end()
+                                })
+                        })
+                }
+                else{
+                        callback(null, data)
+                        client.end()
+                }
+        })
+}
+*/
+
+
 module.exports = users
