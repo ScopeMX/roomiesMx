@@ -7,14 +7,7 @@ var flats = function(conf){
 }
 
 //Aquí empiezan las funciones de Elioth :)
-users.prototype.insertFlat = function(data, callback){
-        //Data: Addres-Dirección donde se ubica el depa.
-        //capacity: Capacidad del depa
-        //occupation: Lugares ya ocupados en el depa.
-        //price: Precio de la renta depa
-        //description: Descripción del depa
-        //sex_filter: Filtro de sexo, 0 mixto, 1 solo mujeres, 2 solo hombres
-        //near_of: Escuela al que se encuentra cercano el depa
+flats.prototype.insertFlat = function(data, callback){
         var client = new pg.Client(stringConnection)
         client.connect()
 
@@ -29,8 +22,8 @@ users.prototype.insertFlat = function(data, callback){
         query.on('end', function(){
                 var idUsr = 0;
                 if(!existe){
-                        var insertar = client.query("insert into flats (address, capacity, occupation, price, description, sex_filter) values($1, $2, $3, $4, $5, $6)",
-                        [data.address, data.capacity, data.occupation, data.price, data.description, data.sex_filter])
+                        var insertar = client.query("insert into flats (address, photo, capacity, occupation, price, description, sex_filter) values($1, $2, $3, $4, $5, $6, $7)",
+                        [data.address, data.id, data.provider, data.name, 0, data.photo, "", "", false, 0])
 
                         insertar.on('row', function(row){})
 
@@ -38,8 +31,6 @@ users.prototype.insertFlat = function(data, callback){
                                 callback(null, data)
                                 client.end()
                         })
-                        
-                        var insertarRelacion=client.query("",[]);
                 }
                 else{
                         callback(null, data)
@@ -47,5 +38,44 @@ users.prototype.insertFlat = function(data, callback){
                 }
         })
 }
+
+//NECESITA: id de la escuela de la que quieres depas cercanos, solo eso
+flats.prototype.getAllFlats = function(data, callback){
+        var client = new pg.Client(stringConnection)
+        client.connect()
+
+        var response = new Array();
+
+        var query = client.query("SELECT * FROM rel_flats JOIN flats ON(id_flat = id_flat); WHERE id_school = $1", [data])
+
+        query.on('row', function(row){
+                response[response.length] = row
+        })
+
+        query.on('end', function(){
+                callback(response);
+                client.end();
+        })
+}
+
+//NECESITA: id del flat
+flats.prototype.getFlat = function(data, callback){
+        var client = new pg.Client(stringConnection)
+        client.connect()
+
+        var response;
+
+        var query = client.query("SELECT * FROM flats WHERE id_flat = $1", [data])
+
+        query.on('row', function(row){
+                response = row
+        })
+
+        query.on('end', function(){
+                callback(response);
+                client.end();
+        })
+}
+
 
 module.exports = flats
