@@ -24,7 +24,7 @@ users.prototype.get_main = function (req, res, next) {
   var object={
     user: req.user
   }
-  model.getUser(req.users.id);
+  //model.getUser(req.users.id);
   this.view.main(res, object);
 };
 
