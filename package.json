@@ -1,0 +1,34 @@
+{
+  "name": "roomies",
+  "version": "1.0.0",
+  "description": "Local Hack Day Ideas",
+  "main": "server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iLordTony/roomies.git"
+  },
+  "keywords": [
+    "room",
+    "cuartos"
+  ],
+  "author": "Strom",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iLordTony/roomies/issues"
+  },
+  "homepage": "https://github.com/iLordTony/roomies#readme",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "express-session": "^1.11.3",
+    "formidable": "^1.0.17",
+    "passport": "^0.3.0",
+    "passport-facebook": "^2.0.0",
+    "passport-twitter": "^1.0.3",
+    "pg": "^4.4.2",
+    "swig": "^1.4.2"
+  }
+}
