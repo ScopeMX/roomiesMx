@@ -22,14 +22,9 @@ flats.prototype.insertFlat = function(data, callback){
         query.on('end', function(){
                 var idUsr = 0;
                 if(!existe){
-<<<<<<< HEAD
                         //Metemos información del depa a la tabla
                         var insert = client.query("insert into flats (address, capacity, occupation, price, description, sex_filter) values($1, $2, $3, $4, $5, $6);",
                         [data.address, data.capacity, data.occupation, data.price, data.description, data.sex_filter])
-=======
-                        var insertar = client.query("insert into flats (address, photo, capacity, occupation, price, description, sex_filter) values($1, $2, $3, $4, $5, $6, $7)",
-                        [data.address, data.id, data.provider, data.name, 0, data.photo, "", "", false, 0])
->>>>>>> 50f393f4c235b7f7541e6f32dc1129026cacae83
 
                         insert.on('row', function(row){})
 
@@ -73,6 +68,27 @@ flats.prototype.insertFlat = function(data, callback){
                 }
         })
 }
+
+users.prototype.insertPhoto_Flat = function(data, callback){
+        //
+        var client = new pg.Client(stringConnection)
+        client.connect()
+
+        var existe = false;
+
+        var query = client.query("SELECT * FROM users WHERE id_provider = $1;", [data.providerid])
+
+        query.on('row', function(row){
+                existe = true
+        })
+
+        query.on('end', function(){
+                
+        })
+}
+        
+
+
 
 //NECESITA: id de la escuela de la que quieres depas cercanos, solo eso
 flats.prototype.getAllFlats = function(data, callback){
