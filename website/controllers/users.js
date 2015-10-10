@@ -33,5 +33,4 @@ users.prototype.get_main = function (req, res, next) {
     }
   });
 };
-
 module.exports = users;

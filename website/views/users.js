@@ -12,4 +12,5 @@ users.prototype.main = function (res, object) {
   res.render('main', object)
 }
 
+
 module.exports = users;
