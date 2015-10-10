@@ -38,12 +38,13 @@ users.prototype.loginUser = function(data, callback){
         })
 }
 
-//NECESITA: email, phone, school, idprovider, type
+//NECESITA: todo user menos photo
 users.prototype.completeUser = function(data, callback){
         var client = new pg.Client(stringConnection)
         client.connect()
 
-        var query = client.query("UPDATE users SET email = $1, phone = $2, school = $3, complete = $4 type = $5 WHERE id_provider = $5", [data.email, data.phone, data.school, true, data.idprovider, data.type])
+        var query = client.query("UPDATE users SET provider=$1, name=$2, type = $3, email = $4, complete = $5, id_school = $6 WHERE id_provider = $7",
+        [data.provider, data.name, data.type, data.email, true, data.id_school, data.id_provider])
 
         query.on('row', function(row){})
 
