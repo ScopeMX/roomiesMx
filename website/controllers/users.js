@@ -13,13 +13,19 @@ var users = function(conf){
 }
 
 users.prototype.get_index = function(req, res, next){
-  var object={
-    user: req.user
-  }
-        this.view.index(res, object);
+
+        this.view.index(res, {});
 }
 users.prototype.get_login = function(req, res, next){
         this.view.login(res, {});
 }
+
+users.prototype.get_main = function (req, res, next) {
+  var object={
+    user: req.user
+  }
+  model.getUser(req.users.id);
+  this.view.main(res, object);
+};
 
 module.exports = users;
