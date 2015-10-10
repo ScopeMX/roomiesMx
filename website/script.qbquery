@@ -1,0 +1,34 @@
+ create database roomies;
+ use roomies;
+ create table flat(
+ 	id_depa int primary key auto_increment not null;
+ 	direccion varchar(100) not null;
+ 	fotos varchar(100) not null;
+ 	capacidad int not null default 1;
+ 	ocupados int not null default 0;
+ 	precio float not null,
+ 	desripcion varchar(255) not null,
+ 	filtro_sexo int not null default 0
+ 	-- 0 Mixto, 1 Mujeres, 2 Hombres
+);
+ 
+--Users
+ create table users(
+ 	id_user int primary key auto_increment;
+ 	id_provider varchar(255) not null,
+ 	provider varchar(50) not null,
+ 	name varchar(150) not null,
+ 	type int not null,
+ 	--0 Prestador, 1 = Rentador
+ 	photo varchar(200) not null,
+ 	phone varchar(50) not null,
+ 	email varchar(70) not null,
+ 	complete boolean not null default 0,
+ 	-- 0 inclomplite, 1 complete.
+ 	id_school int not null references schools(id_school)
+);
+
+-- Schools
+create table schools(
+
+);
