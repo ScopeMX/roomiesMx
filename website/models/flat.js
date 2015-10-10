@@ -39,7 +39,7 @@ flats.prototype.insertFlat = function(data, callback){
         })
 }
 
-//NECESITA: id de la escuela de la que quieres depas cercanos, solo eso
+//NECESITA: id de la escuela de la que quieres depas cercano, y tiene como opcion que si ademas de eso esta un filtro, pues lo aplica
 flats.prototype.getAllFlats = function(data, callback){
         var client = new pg.Client(stringConnection)
         client.connect()

@@ -79,4 +79,22 @@ users.prototype.getUser = function(data, callback){
                 }
         })
 }
+
+users.prototype.getSchool = function(data, callback){
+        var client = new pg.Client(stringConnection)
+        client.connect()
+
+        var response  = new Array()
+        var query = client.query("SELECT * FROM schools;");
+
+        query.on('row', function(row){
+                response[response.length] = row
+        })
+
+        query.on('end', function(){
+                callback(response)
+                client.end()
+        })
+}
+
 module.exports = users
