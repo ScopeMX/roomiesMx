@@ -3,9 +3,8 @@
 
  create table flats(
  	id_flat serial primary key not null,
- 	adress varchar(100) not null,
+ 	address varchar(100) not null,
  	--Dirección escrita
- 	photos varchar(100) not null,
  	capacity int not null default 1,
  	occupation int not null default 0,
  	price float not null,
@@ -27,29 +26,33 @@
  	email varchar(70) not null,
  	complete boolean not null default false,
  	-- false inclomplete, true complete.
- 	id_school int not null references schools(id_school)
+ 	id_school int not null
 );
 
 -- Schools
 create table schools(
 	id_school serial primary key ,
 	name varchar(100) not null,
-	adress varchar(100) not null
+	place_id varchar(100) not null
 );
 
 -- Tabla para guardar la relación entre prestador y depa.
 create table lender_flat(
-	id_lender not null references users(id_user),
-	id_flat not null references flats(id_flat)
+	id_lender int not null,
+	id_flat int not null
 );
 
 -- Tabla para guardar relación entre el estudiante y depa.
 create table student_flat(
-	id_student primary key references users(id_user),
-	id_flat not null references flats(id_flat)
+	id_student int primary key,
+	id_flat int not null
 );
 
 --
-
+create table photos(
+	id_photo serial primary key,
+	id_flat int not null,
+	address varchar(150) not null
+);
 
 	
