@@ -99,13 +99,6 @@ users.prototype.getUser = function(data, callback){
         })
 }
 
-users.prototype.addFlat = function(data, callback){
-
-}
-
-users.prototype.selectFlats = function(data, callback){
-
-}
 
 
 
