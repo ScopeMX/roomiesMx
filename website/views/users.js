@@ -11,6 +11,8 @@ users.prototype.login = function(res, object){
 users.prototype.main = function (res, object) {
   res.render('main', object)
 }
-
+users.prototype.perfil = function (res, object) {
+  res.render('perfil', {})
+}
 
 module.exports = users;
