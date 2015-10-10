@@ -3,6 +3,8 @@ var swig = require('swig');
 var bodyParser = require('body-parser');
 var middlewares = require('./middlewares/admin');
 var router = require('./website/router');
+var passport = require('passport');
+require('./passport')(passport);
 
 var ExpressServer = function(config){
 	config = config || {}
@@ -21,8 +23,31 @@ var ExpressServer = function(config){
 	//setting swig
 	this.expressServer.engine('html', swig.renderFile)
 	this.expressServer.set('view engine', 'html')
-	this.expressServer.set('views', __dirname + '/website/views/templates')
+	this.expressServer.set('views', __dirname + '/website/views/templates');
 
+	//Todo lo del login social
+	this.expressServer.use(passport.initialize());
+	this.expressServer.use(passport.session());
+	// Enlace al login de twiiter
+	this.expressServer.get('/auth/twitter', passport.authenticate('twitter'));
+	// Enlace al login de facebook
+	this.expressServer.get('/auth/facebook', passport.authenticate('facebook'));
+	// si se logra loggear lo manda al origen, sino al login
+	this.expressServer.get('/auth/twitter/callback', passport.authenticate('twitter',
+  { successRedirect: '/users/index', failureRedirect: '/users/login' }
+	));
+	// si se logra loggear lo manda al origen, sino al login
+	this.expressServer.get('/auth/facebook/callback', passport.authenticate('facebook',
+  { successRedirect: '/users/index', failureRedirect: '/users/login' }
+	));
+
+	this.expressServer.get('/logout', function(req, res) {
+  req.logout();
+  res.redirect('/users/login');
+});
+this.expressServer.get('/', function (req, res, next) {
+	res.redirect('/users/index');
+})
 
 	for(var controller in router){
 		for(var funcionalidad in router[controller].prototype){
@@ -32,6 +57,7 @@ var ExpressServer = function(config){
 				data = (method == 'get' && data !== undefined) ? ':data' : ''
 
 			var url = '/' + controller + '/' + entorno + '/' + data
+			console.log("La url es: " + url);
 			this.router(method, funcionalidad, url, controller)
 		}
 	}
