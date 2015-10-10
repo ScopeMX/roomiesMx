@@ -1,3 +1,11 @@
+var pg = require('pg')
+
+var stringConnection = process.env.DATABASE_URL || 'posgres://localhost:5432/roomies'
+
+var flats = function(conf){
+        conf = conf || {}
+}
+
 //Aquí empiezan las funciones de Elioth :)
 users.prototype.insertFlat = function(data, callback){
         var client = new pg.Client(stringConnection)
@@ -30,3 +38,5 @@ users.prototype.insertFlat = function(data, callback){
                 }
         })
 }
+
+module.exports = flats
