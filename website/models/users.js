@@ -1,6 +1,6 @@
 var pg = require('pg')
 
-var stringConnection = process.env.DATABASE_URL
+var stringConnection = process.env.DATABASE_URL || 'posgres://localhost:5432/roomies'
 
 var users = function(conf){
         conf = conf || {}
@@ -21,22 +21,14 @@ users.prototype.loginUser = function(data, callback){
         query.on('end', function(){
                 var idUsr = 0;
                 if(!existe){
-                        var getId = client.query("SELECT COALESCE(MAX(id_user), 0) FROM users;")
+                        var insertar = client.query("INSERT INTO users(id_provider, provider, name, type, photo, phone, email, complete, id_school)",
+                        [data.id, data.provider, data.name, 0, data.photo, "", "", false, 0])
 
-                        getId.on('row', function(row){
-                                idUsr = row.coalesce + 1
-                        })
+                        insertar.on('row', function(row){})
 
-                        getId.on('end', function(){
-                                var insertar = client.query("INSERT INTO users(id_user, id_provider, provider, name, type, photo, phone, email, complete, id_school)",
-                                [idUsr, data.id, data.provider, data.name, 0, data.photo, "", "", false, 0])
-
-                                insertar.on('row', function(row){})
-
-                                insertar.on('end', function(){
-                                        callback(null, data)
-                                        client.end()
-                                })
+                        insertar.on('end', function(){
+                                callback(null, data)
+                                client.end()
                         })
                 }
                 else{
@@ -101,7 +93,13 @@ users.prototype.getUser = function(data, callback){
         })
 }
 
+users.prototype.addFlat = function(data, callback){
 
+}
+
+users.prototype.selectFlats = function(data, callback){
+        
+}
 
 
 
