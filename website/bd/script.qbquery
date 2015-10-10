@@ -2,7 +2,7 @@
  use roomies;
 
  create table flats(
- 	id_flat int primary key serial not null,
+ 	id_flat serial primary key not null,
  	adress varchar(100) not null,
  	--Dirección escrita
  	photos varchar(100) not null,
@@ -16,7 +16,7 @@
  
 --Users
  create table users(
- 	id_user int primary key serial,
+ 	id_user serial primary key,
  	id_provider varchar(255) not null,
  	provider varchar(50) not null,
  	name varchar(150) not null,
@@ -32,7 +32,7 @@
 
 -- Schools
 create table schools(
-	id_school int primary key serial,
+	id_school serial primary key ,
 	name varchar(100) not null,
 	adress varchar(100) not null
 );
