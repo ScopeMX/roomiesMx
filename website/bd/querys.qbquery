@@ -1,0 +1,6 @@
+--Querys Usuario
+select * from users where users.id_provider=();
+select users.id_provider from users where users.id_provider=();
+
+--Inserts usuario
+insert into users 

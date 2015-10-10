@@ -1,12 +1,13 @@
  create database roomies;
  use roomies;
 
- create table flat(
- 	id_depa int primary key auto_increment not null;
- 	adress varchar(100) not null;
- 	photos varchar(100) not null;
- 	capacity int not null default 1;
- 	occupation int not null default 0;
+ create table flats(
+ 	id_flat int primary key auto_increment not null,
+ 	adress varchar(100) not null,
+ 	--Dirección escrita
+ 	photos varchar(100) not null,
+ 	capacity int not null default 1,
+ 	occupation int not null default 0,
  	price float not null,
  	description varchar(255) not null,
  	sex_filter int not null default 0
@@ -15,7 +16,7 @@
  
 --Users
  create table users(
- 	id_user int primary key auto_increment;
+ 	id_user int primary key auto_increment,
  	id_provider varchar(255) not null,
  	provider varchar(50) not null,
  	name varchar(150) not null,
@@ -31,8 +32,25 @@
 
 -- Schools
 create table schools(
-	id_school int primary key auto_increment;
+	id_school int primary key auto_increment,
 	name varchar(100) not null,
 	lat varchar(100) not null,
 	long varchar(100) not null
 );
+
+-- Tabla para guardar la relación entre prestador y depa.
+create table lender_flat(
+	id_lender not null references users(id_user),
+	id_flat not null references flats(id_flat)
+);
+
+-- Tabla para guardar relación entre el estudiante y depa.
+create table student_flat(
+	id_student primary key references users(id_user),
+	id_flat not null references flats(id_flat)
+);
+
+--
+
+
+	
