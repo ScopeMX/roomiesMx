@@ -1,7 +1,7 @@
 var TwitterStrategy = require('passport-twitter').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 
-var config = require('./config');
+var config = require('./conf');
 var UserModel = require('./website/models/users');
 
 var Passport = function(passport) {
@@ -22,11 +22,14 @@ var Passport = function(passport) {
 		callbackURL		 : '/auth/twitter/callback'
 	}, function(accessToken, refreshToken, profile, done) {
     var data = {};
-    data.provider profile.provider;
+    data.provider = profile.provider;
     data.photo = profile.photos[0].value;
     data.id = profile.id;
     data.name = profile.displayName;
-    self.model.loginUser(data, done);
+    console.log("Passport" + data);
+
+    //self.model.loginUser(data, done);
+    done(null, data);
 	}));
 
 	passport.use(new FacebookStrategy({
@@ -40,8 +43,10 @@ var Passport = function(passport) {
     data.id = profile.id;
     data.name = profile.displayName;
     profile.provider = "facebook";
+    console.log("Passport" + data);
 
-		self.model.loginUser(data, done);
+    self.model.loginUser(data, done);
+    //done(null, data);
 	}));
 };
 

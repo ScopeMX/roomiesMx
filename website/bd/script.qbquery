@@ -1,12 +1,12 @@
  create database roomies;
  use roomies;
 
- create table flat(
- 	id_depa int primary key auto_increment not null;
- 	adress varchar(100) not null;
- 	photos varchar(100) not null;
- 	capacity int not null default 1;
- 	occupation int not null default 0;
+ create table flats(
+ 	id_flat serial primary key not null,
+ 	address varchar(100) not null,
+ 	--Dirección escrita
+ 	capacity int not null default 1,
+ 	occupation int not null default 0,
  	price float not null,
  	description varchar(255) not null,
  	sex_filter int not null default 0
@@ -15,7 +15,7 @@
  
 --Users
  create table users(
- 	id_user int primary key auto_increment;
+ 	id_user serial primary key,
  	id_provider varchar(255) not null,
  	provider varchar(50) not null,
  	name varchar(150) not null,
@@ -24,15 +24,39 @@
  	photo varchar(200) not null,
  	phone varchar(50) not null,
  	email varchar(70) not null,
- 	complete boolean not null default 0,
- 	-- 0 inclomplete, 1 complete.
- 	id_school int not null references schools(id_school)
+ 	complete boolean not null default false,
+ 	-- false inclomplete, true complete.
+ 	id_school int not null
 );
 
 -- Schools
 create table schools(
-	id_school int primary key auto_increment;
+	id_school serial primary key ,
 	name varchar(100) not null,
-	lat varchar(100) not null,
-	long varchar(100) not null
+	place_id varchar(100) not null
 );
+
+create table photos(
+	id_photo serial primary key,
+	id_flat int not null,
+	address varchar(150) not null
+);
+
+-- Tabla para guardar la relación entre prestador y depa.
+create table lender_flat(
+	id_lender int not null,
+	id_flat int not null
+);
+
+-- Tabla para guardar relación entre el estudiante y depa.
+create table student_flat(
+	id_student int primary key,
+	id_flat int not null
+);
+
+-- Tabla que relaciona los depas y las escuelas cercanas.
+create table flat_school(
+	id_flat int not null,
+	id_school int not null
+);
+	
