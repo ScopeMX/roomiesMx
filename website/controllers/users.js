@@ -24,6 +24,10 @@ users.prototype.get_main = function (req, res, next) {
   var object={
     user: req.user
   }
+<<<<<<< HEAD
+  //model.getUser(req.users.id);
+  this.view.main(res, object);
+=======
   var self = this;
   this.model.getUser(req.user.id, function (data) {
     if(!data && data.complete === true) {
@@ -32,6 +36,7 @@ users.prototype.get_main = function (req, res, next) {
       self.view.perfil(res, object);
     }
   });
+>>>>>>> a20403425771b5ebded722250fe3ec1f9651548e
 };
 
 users.prototype.post_perfil = function (req, res, next) {
