@@ -3,7 +3,7 @@
 
  create table flats(
  	id_flat serial primary key not null,
- 	adress varchar(100) not null,
+ 	address varchar(100) not null,
  	--Dirección escrita
  	capacity int not null default 1,
  	occupation int not null default 0,
@@ -52,7 +52,7 @@ create table student_flat(
 create table photos(
 	id_photo serial primary key,
 	id_flat int not null,
-
+	address varchar(150) not null
 );
 
 	
