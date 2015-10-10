@@ -28,8 +28,8 @@ var Passport = function(passport) {
     data.name = profile.displayName;
     console.log("Passport" + data);
 
-    //self.model.loginUser(data, done);
-    done(null, data);
+    self.model.loginUser(data, done);
+    //done(null, data);
 	}));
 
 	passport.use(new FacebookStrategy({
