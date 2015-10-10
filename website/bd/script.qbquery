@@ -25,8 +25,8 @@
  	photo varchar(200) not null,
  	phone varchar(50) not null,
  	email varchar(70) not null,
- 	complete boolean not null default 0,
- 	-- 0 inclomplete, 1 complete.
+ 	complete boolean not null default false,
+ 	-- false inclomplete, true complete.
  	id_school int not null references schools(id_school)
 );
 
