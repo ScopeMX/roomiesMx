@@ -3,7 +3,7 @@ var users = function(conf){
 }
 
 users.prototype.index = function(res, object){
-        res.render('index',{});
+        res.render('index', object);
 }
 users.prototype.login = function(res, object){
         res.render('login',{});

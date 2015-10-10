@@ -11,7 +11,10 @@ var users = function(conf){
 }
 
 users.prototype.get_index = function(req, res, next){
-        this.view.index(res, {});
+  var object={
+    user: req.user
+  }
+        this.view.index(res, object);
 }
 users.prototype.get_login = function(req, res, next){
         this.view.login(res, {});
