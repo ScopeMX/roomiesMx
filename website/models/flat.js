@@ -39,7 +39,6 @@ flats.prototype.insertFlat = function(data, callback){
         })
 }
 
-<<<<<<< HEAD
 //NECESITA: id de la escuela de la que quieres depas cercanos, solo eso
 flats.prototype.getAllFlats = function(data, callback){
         var client = new pg.Client(stringConnection)
@@ -80,6 +79,3 @@ flats.prototype.getFlat = function(data, callback){
 
 
 module.exports = flats
-=======
-module.exports = flats
->>>>>>> a1191ccf421df54aac877a6fa5b4575218df57dc
