@@ -2,5 +2,13 @@
         "port":3000,
         "dataBase":{
                 "url":""
+        },
+        "facebook": {
+          "id": "1210297932330522",
+          "secret": "1435f3ed2ccaed76bfb799627c180e8f"
+        },
+        "twitter": {
+          "key": "u2tnCanyT7VuWzkUI20MTTNF6",
+          "secret": "4kUmiT5Gs8qcGHzAw55mMlJvpmGKZpZ12YMYV1nrhXG8Ormc8V"
         }
 }
