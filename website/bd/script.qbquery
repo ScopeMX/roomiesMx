@@ -39,14 +39,14 @@ create table schools(
 
 -- Tabla para guardar la relación entre prestador y depa.
 create table lender_flat(
-	id_lender not null,
-	id_flat not null
+	id_lender int not null,
+	id_flat int not null
 );
 
 -- Tabla para guardar relación entre el estudiante y depa.
 create table student_flat(
-	id_student primary key,
-	id_flat not null
+	id_student int primary key,
+	id_flat int not null
 );
 
 --

@@ -126,7 +126,7 @@ users.prototype.getUser = function(data, callback){
 
 
 //Aquí empiezan las funciones de Elioth :)
-/*users.prototype.insetFlat = function(data, callback){
+users.prototype.insertFlat = function(data, callback){
         var client = new pg.Client(stringConnection)
         client.connect()
 
@@ -165,7 +165,7 @@ users.prototype.getUser = function(data, callback){
                 }
         })
 }
-*/
+
 
 
 module.exports = users
