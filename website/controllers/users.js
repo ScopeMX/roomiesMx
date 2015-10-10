@@ -1,9 +1,11 @@
-var View = require("../views/users");
+var View = require("../views/users")
+var Model = require('../models/users')
 
 var users = function(conf){
         conf = conf || {}
 
         this.view = new View();
+        this.model = new Model();
 
         this.response = function(){
 		this[conf.funcionalidad](conf.req, conf.res, conf.next)

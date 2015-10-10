@@ -52,3 +52,4 @@ var Passport = function(passport) {
 };
 
 module.exports = Passport;
+>>>>>>> 46262ce7dd60e9e723b336936f835d13778265a3

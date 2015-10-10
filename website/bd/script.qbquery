@@ -1,0 +1,55 @@
+ create database roomies;
+ use roomies;
+
+ create table flats(
+ 	id_flat serial primary key not null,
+ 	adress varchar(100) not null,
+ 	--Dirección escrita
+ 	photos varchar(100) not null,
+ 	capacity int not null default 1,
+ 	occupation int not null default 0,
+ 	price float not null,
+ 	description varchar(255) not null,
+ 	sex_filter int not null default 0
+ 	-- 0 Mixto, 1 Mujeres, 2 Hombres
+);
+ 
+--Users
+ create table users(
+ 	id_user serial primary key,
+ 	id_provider varchar(255) not null,
+ 	provider varchar(50) not null,
+ 	name varchar(150) not null,
+ 	type int not null,
+ 	--0 Prestador, 1 = Rentador
+ 	photo varchar(200) not null,
+ 	phone varchar(50) not null,
+ 	email varchar(70) not null,
+ 	complete boolean not null default false,
+ 	-- false inclomplete, true complete.
+ 	id_school int not null references schools(id_school)
+);
+
+-- Schools
+create table schools(
+	id_school serial primary key ,
+	name varchar(100) not null,
+	adress varchar(100) not null
+);
+
+-- Tabla para guardar la relación entre prestador y depa.
+create table lender_flat(
+	id_lender not null references users(id_user),
+	id_flat not null references flats(id_flat)
+);
+
+-- Tabla para guardar relación entre el estudiante y depa.
+create table student_flat(
+	id_student primary key references users(id_user),
+	id_flat not null references flats(id_flat)
+);
+
+--
+
+
+	
