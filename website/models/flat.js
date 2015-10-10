@@ -1,5 +1,13 @@
+var pg = require('pg')
+
+var stringConnection = process.env.DATABASE_URL || 'posgres://localhost:5432/roomies'
+
+var flats = function(conf){
+        conf = conf || {}
+}
+
 //Aquí empiezan las funciones de Elioth :)
-users.prototype.insertFlat = function(data, callback){
+flats.prototype.insertFlat = function(data, callback){
         var client = new pg.Client(stringConnection)
         client.connect()
 
@@ -30,3 +38,44 @@ users.prototype.insertFlat = function(data, callback){
                 }
         })
 }
+
+//NECESITA: id de la escuela de la que quieres depas cercanos, solo eso
+flats.prototype.getAllFlats = function(data, callback){
+        var client = new pg.Client(stringConnection)
+        client.connect()
+
+        var response = new Array();
+
+        var query = client.query("SELECT * FROM rel_flats JOIN flats ON(id_flat = id_flat); WHERE id_school = $1", [data])
+
+        query.on('row', function(row){
+                response[response.length] = row
+        })
+
+        query.on('end', function(){
+                callback(response);
+                client.end();
+        })
+}
+
+//NECESITA: id del flat
+flats.prototype.getFlat = function(data, callback){
+        var client = new pg.Client(stringConnection)
+        client.connect()
+
+        var response;
+
+        var query = client.query("SELECT * FROM flats WHERE id_flat = $1", [data])
+
+        query.on('row', function(row){
+                response = row
+        })
+
+        query.on('end', function(){
+                callback(response);
+                client.end();
+        })
+}
+
+
+module.exports = flats
