@@ -27,7 +27,7 @@ users.prototype.get_main = function (req, res, next) {
   //console.log(req.user);
   if(req.user === undefined) {
     console.log("Es undefined");
-    res.redirect('/users/login');
+    this.view.login(res, {});
   } else {
     var self = this;
     this.model.getUser(req.user.id, function (data) {
