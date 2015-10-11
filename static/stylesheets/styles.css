@@ -1,3 +1,32 @@
+ html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        font-size: 18px;
+      }
+      #map {
+        height: 100%;
+      }
 .body_landing{
 	min-height: 500px;
+}
+.mapa{
+	 height: 100%; margin: 0; padding: 0; 
+}
+
+    .parallax-container {
+      height: 500px;
+    }
+.departamentos{
+	display: inline-block;
+	width: 40%;
+	margin: 0px;
+}
+.mapa{
+	display: inline-block;
+	width: 40%;
+	margin: 0px;
+}
+nav{
+	font-family: 1em;
 }

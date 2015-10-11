@@ -22,14 +22,44 @@ flats.prototype.insertFlat = function(data, callback){
         query.on('end', function(){
                 var idUsr = 0;
                 if(!existe){
-                        var insertar = client.query("insert into flats (address, photo, capacity, occupation, price, description, sex_filter) values($1, $2, $3, $4, $5, $6, $7)",
-                        [data.address, data.id, data.provider, data.name, 0, data.photo, "", "", false, 0])
+                        //Metemos información del depa a la tabla
+                        var insert = client.query("insert into flats (address, capacity, occupation, price, description, sex_filter) values($1, $2, $3, $4, $5, $6);",
+                        [data.address, data.capacity, data.occupation, data.price, data.description, data.sex_filter])
 
-                        insertar.on('row', function(row){})
+                        insert.on('row', function(row){})
 
-                        insertar.on('end', function(){
-                                callback(null, data)
-                                client.end()
+                        insert.on('end', function(){
+
+                                //Obtenemos el id del departamento que acabamos de registrar (Necesitamos corregir esto)
+                                var id_flat;
+                                var getId_flat=client.query("select COALESCE(MAX(id_flat), 0) FROM flats;");
+
+                                getId_flat.on('row', function(row){
+                                        id_flat=row.coalesce;//Asignamos el id más reciente de del depa
+                                })
+
+                                getId_flat.on('end', function(){
+                                        //Insertamos la relación de lender_flat
+                                        var insertLender_Flat=client.query("insert into lender_flat (id_lender, id_flat) values($1, $2);",
+                                        [data.providerid, id_flat]);
+                                        insertLender_Flat.on('row', function(row){})
+                                        //Función que relaciona flat_school
+                                        insertLender_Flat.on('end', function(){
+                                                        var insertFlat_School=client.query("insert into flat_school (id_flat, id_school) values($1, $2);",
+                                                                [id_flat, data.near_of]);
+                                                        insertFlat_School.on('row', function(row){})
+
+                                                        insertFlat_School.on('end', function(){
+                                                                callback(null, data)
+                                                                client.end()
+
+                                                        })
+
+
+                                        })
+                                })
+
+
                         })
                 }
                 else{
@@ -39,7 +69,28 @@ flats.prototype.insertFlat = function(data, callback){
         })
 }
 
-//NECESITA: id de la escuela de la que quieres depas cercano, y tiene como opcion que si ademas de eso esta un filtro, pues lo aplica
+users.prototype.insertPhoto_Flat = function(data, callback){
+        //
+        var client = new pg.Client(stringConnection)
+        client.connect()
+
+        var existe = false;
+
+        var query = client.query("SELECT * FROM users WHERE id_provider = $1;", [data.providerid])
+
+        query.on('row', function(row){
+                existe = true
+        })
+
+        query.on('end', function(){
+
+        })
+}
+
+
+
+
+//NECESITA: id de la escuela de la que quieres depas cercanos, solo eso
 flats.prototype.getAllFlats = function(data, callback){
         var client = new pg.Client(stringConnection)
         client.connect()
@@ -80,132 +131,21 @@ flats.prototype.getFlat = function(data, callback){
         })
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//NECESITA: idstudent(que es el idprovider) y el idflat, que debe de obtenerse desde el frontend
 flats.prototype.wantFlat = function(data, callback){
         var client = new pg.Client(stringConnection)
         client.connect()
 
-        
+        var query = client.query("INSERT INTO student_flat(id_student, id_flat) VALUES($1, $2)", [data.idstudent, data.idflat])
+
+        query.on('row', function(row){})
+
+        query.on('end', function(){
+                callback({
+                        agregado: true
+                })
+                client.end()
+        })
 }
 
 
