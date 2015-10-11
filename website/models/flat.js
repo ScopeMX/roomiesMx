@@ -83,7 +83,7 @@ users.prototype.insertPhoto = function(data, callback){
         query.on('row', function(row){
                 existe = true
         })
-        //Después de haber validado que existe el usuario hacemos la función
+        //Después de haber validado que existe el usuario hacemos la función para agregar la foto al depa
         query.on('end', function(){
                 var insertPhoto_flat=client.query("insert into photos (id_flat, address)",
                         [data.id_flat, data.address]);
