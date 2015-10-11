@@ -15,4 +15,8 @@ users.prototype.perfil = function (res, object) {
   res.render('perfil', {object})
 }
 
+users.prototype.perfil = function(res, object){
+        res.render('perfil', object)
+}
+
 module.exports = users;

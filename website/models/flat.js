@@ -52,10 +52,10 @@ flats.prototype.insertFlat = function(data, callback){
                                                         insertFlat_School.on('end', function(){
                                                                 callback(null, data)
                                                                 client.end()
-                                                        
-                                                        })  
 
-                                                        
+                                                        })
+
+
                                         })
                                 })
 
@@ -69,10 +69,8 @@ flats.prototype.insertFlat = function(data, callback){
         })
 }
 
-users.prototype.insertPhoto = function(data, callback){
-        //Data:
-        //Debe traer el id_flat del departamento al que se va a subir la foto
-        //address: Es la url donde se guardada la imagen
+users.prototype.insertPhoto_Flat = function(data, callback){
+        //
         var client = new pg.Client(stringConnection)
         client.connect()
 
@@ -83,17 +81,12 @@ users.prototype.insertPhoto = function(data, callback){
         query.on('row', function(row){
                 existe = true
         })
-        //Después de haber validado que existe el usuario hacemos la función
+
         query.on('end', function(){
-                var insertPhoto_flat=client.query("insert into photos (id_flat, address)",
-                        [data.id_flat, data.address]);
-                insertPhoto_flat.on('row', function(row){})
-                insertPhoto_flat.on('end', function(){
-                        
-                })
+
         })
 }
-        
+
 
 
 
@@ -104,13 +97,16 @@ flats.prototype.getAllFlats = function(data, callback){
 
         var response = new Array();
 
-        var query = client.query("SELECT * FROM flat_school JOIN flats ON(flat_school.id_flat = id_flat); WHERE id_school = $1", [data])
+        var query = client.query("SELECT * FROM rel_flats JOIN flats ON(id_flat = id_flat); WHERE id_school = $1", [data])
 
         query.on('row', function(row){
                 response[response.length] = row
         })
 
         query.on('end', function(){
+
+
+
                 callback(response);
                 client.end();
         })
@@ -134,6 +130,24 @@ flats.prototype.getFlat = function(data, callback){
                 client.end();
         })
 }
+
+//NECESITA: idstudent(que es el idprovider) y el idflat, que debe de obtenerse desde el frontend
+flats.prototype.wantFlat = function(data, callback){
+        var client = new pg.Client(stringConnection)
+        client.connect()
+
+        var query = client.query("INSERT INTO student_flat(id_student, id_flat) VALUES($1, $2)", [data.idstudent, data.idflat])
+
+        query.on('row', function(row){})
+
+        query.on('end', function(){
+                var cambiar = client.query("UPDATE flats SET occupation = $1 WHERE id_flat")
+                client.end()
+        })
+}
+
+
+flats.prototype.getOwnerFlats =
 
 
 module.exports = flats
