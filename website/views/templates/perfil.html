@@ -24,7 +24,7 @@
   <body>
     <form class="col s12"  method = "post">
 
-    <nav class = "orange">
+    <nav class = "red darken-4">
         <div class="nav-wrapper">
           <a href="#" class="brand-logo">Perfil</a>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -59,21 +59,24 @@
             <input id="telephone" type="text" class="validate">
             <label for="telephone">Telefono</label>
       </div>
-
+      <br><br>
 
       <div class="row">
         <div class="input-field col s12">
             <input id="email"  type="text" class="validate">
             <label for="email">Email</label>
       </div>
-
-      <div class="row">
-        <div class="input-field col s12">
-            <input id="schooltype"  type="text" class="validate">
-            <label for="schooltype">Tipo de escuela</label>
-      </div>
-
       <br><br>
+
+      <div class="input-field col s12">
+          <select class="browser-default">
+            <option value="" disabled selected>Tipo de escuela</option>
+            <option value="ESCOM">ESCOM - Escuela Superior de Computo</option>
+            <option value="ESFM">ESFM - Escuela Superior de Fìsica y Matematicas</option>
+            <option value="ESIME">ESIME - Escuela Superior de Ingenieria Mecanica y Electrica</option>
+          </select>
+      </div>
+      <br><br><br><br><br><br><br><br><br><br>
 
       <button class="btn waves-effect waves-light" type="submit" name="action">Modificar</button>
 
@@ -81,7 +84,7 @@
     </div>
     </center>
 
-        <footer class="page-footer black">
+        <footer class="page-footer red darken-2">
           <div class="container">
             <div class="row">
               <div class="col l6 s12">
