@@ -34,4 +34,19 @@ users.prototype.get_main = function (req, res, next) {
   });
 };
 
+users.prototype.post_perfil = function (req, res, next) {
+  var data = {};
+  var object={
+    user: req.user
+  };
+  data.email = req.body.email;
+  data.phone = req.body.phone;
+  data.school = req.body.school;
+  data.idprovider = req.user.id;
+  data.type = req.body.type;
+  var self = this;
+  this.model.completeUser(data, function (moy) {
+    self.view.main(res, object);
+  });
+}
 module.exports = users;
