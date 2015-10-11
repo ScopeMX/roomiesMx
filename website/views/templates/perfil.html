@@ -10,21 +10,21 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
       <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 
-      <link rel="stylesheet" href="../../../static/stylesheets/normalize.css" type='text/css'/>
-      <link rel="stylesheet" href="../../../static/stylesheets/materialize.css" type='text/css'/>
+      <link rel="stylesheet" href="../stylesheets/normalize.css" type='text/css'/>
+      <link rel="stylesheet" href="../stylesheets/materialize.css" type='text/css'/>
       <link href='http://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'/>
 
       <link rel="shortcut icon" href="images/logo.png"/>
 
-      <script type="text/javascript" src="../../../static/js/jquery-2.1.4.min.js"></script>
-      <script type="text/javascript" src="../../../static/js/materialize.js"></script>
-      <script type="text/javascript" src="../../../static/js/materialize.min.js"></script>
-      <script type="text/javascript" src="../../../static/js/roomies.js"></script>
+      <script type="text/javascript" src="../js/jquery-2.1.4.min.js"></script>
+      <script type="text/javascript" src="../js/materialize.js"></script>
+      <script type="text/javascript" src="../js/materialize.min.js"></script>
+      <script type="text/javascript" src="../js/roomies.js"></script>
   </head>
   <body>
-    <form class="col s12"  method = "post">
+    <form class="col s12"  method = "post" action="">
 
-    <nav class = "red darken-4">
+    <nav class = "orange">
         <div class="nav-wrapper">
           <a href="#" class="brand-logo">Perfil</a>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -40,7 +40,7 @@
       <h3>Edita tu perfil</h3>
       <div class="row">
           <div class="input-field col s12">
-              <input id="usuario" type="text" class="validate">
+              <input id="usuario" type="text" class="validate" value="user.name">
               <label for="username">Username</label>
            </div>
        </div>
@@ -58,24 +58,21 @@
             <input id="telephone" type="text" class="validate">
             <label for="telephone">Telefono</label>
       </div>
-      <br><br>
+
 
       <div class="row">
         <div class="input-field col s12">
             <input id="email"  type="text" class="validate">
             <label for="email">Email</label>
       </div>
-      <br><br>
 
-      <div class="input-field col s12">
-          <select class="browser-default">
-            <option value="" disabled selected>Tipo de escuela</option>
-            <option value="ESCOM">ESCOM - Escuela Superior de Computo</option>
-            <option value="ESFM">ESFM - Escuela Superior de Fìsica y Matematicas</option>
-            <option value="ESIME">ESIME - Escuela Superior de Ingenieria Mecanica y Electrica</option>
-          </select>
+      <div class="row">
+        <div class="input-field col s12">
+            <input id="schooltype"  type="text" class="validate">
+            <label for="schooltype">Tipo de escuela</label>
       </div>
-      <br><br><br><br><br><br><br><br><br><br>
+
+      <br><br>
 
       <button class="btn waves-effect waves-light" type="submit" name="action">Modificar</button>
 
@@ -83,7 +80,7 @@
     </div>
     </center>
 
-        <footer class="page-footer red darken-2">
+        <footer class="page-footer black">
           <div class="container">
             <div class="row">
               <div class="col l6 s12">

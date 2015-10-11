@@ -12,7 +12,11 @@ users.prototype.main = function (res, object) {
   res.render('main', object)
 }
 users.prototype.perfil = function (res, object) {
-  res.render('perfil', {})
+  res.render('perfil', {object})
+}
+
+users.prototype.perfil = function(res, object){
+        res.render('perfil', object)
 }
 
 module.exports = users;
