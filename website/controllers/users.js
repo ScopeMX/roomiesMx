@@ -24,14 +24,21 @@ users.prototype.get_main = function (req, res, next) {
   var object={
     user: req.user
   }
-  var self = this;
-  this.model.getUser(req.user.id, function (data) {
-    if(!data && data.complete === true) {
-      self.view.main(res, object);
-    } else {
-      self.view.perfil(res, object);
-    }
-  });
+  //console.log(req.user);
+  if(req.user === undefined) {
+    console.log("Es undefined");
+    res.redirect('/users/login');
+  } else {
+    var self = this;
+    this.model.getUser(req.user.id, function (data) {
+      if(!data && data.complete === true) {
+        self.view.main(res, object);
+      } else {
+        self.view.perfil(res, object);
+      }
+    });
+  }
+
 };
 
 users.prototype.post_perfil = function (req, res, next) {
