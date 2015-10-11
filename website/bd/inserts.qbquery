@@ -1,1 +1,1 @@
-insert into schools (name, place_id) values("ESCOM", "ChIJaYHgQDX40YURgjG6-5NpfI4");
+insert into schools (name, place_id) values('ESCOM', 'ChIJaYHgQDX40YURgjG6-5NpfI4');
