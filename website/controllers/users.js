@@ -32,7 +32,10 @@ users.prototype.get_main = function (req, res, next) {
     var self = this;
     this.model.getUser(req.user.id, function (data) {
       if(!data && data.complete === true) {
-        self.view.main(res, object);
+        if(data.type === 1)
+          self.view.main(res, object);
+        else
+          res.render('/flats/addflat');
       } else {
         self.view.perfil(res, object);
       }
