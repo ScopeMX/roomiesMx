@@ -69,8 +69,10 @@ flats.prototype.insertFlat = function(data, callback){
         })
 }
 
-users.prototype.insertPhoto_Flat = function(data, callback){
-        //
+users.prototype.insertPhoto = function(data, callback){
+        //Data:
+        //Debe traer el id_flat del departamento al que se va a subir la foto
+        //address: Es la url donde se guardada la imagen
         var client = new pg.Client(stringConnection)
         client.connect()
 
@@ -81,9 +83,14 @@ users.prototype.insertPhoto_Flat = function(data, callback){
         query.on('row', function(row){
                 existe = true
         })
-
+        //Después de haber validado que existe el usuario hacemos la función
         query.on('end', function(){
-                
+                var insertPhoto_flat=client.query("insert into photos (id_flat, address)",
+                        [data.id_flat, data.address]);
+                insertPhoto_flat.on('row', function(row){})
+                insertPhoto_flat.on('end', function(){
+                        
+                })
         })
 }
         
@@ -97,7 +104,7 @@ flats.prototype.getAllFlats = function(data, callback){
 
         var response = new Array();
 
-        var query = client.query("SELECT * FROM rel_flats JOIN flats ON(id_flat = id_flat); WHERE id_school = $1", [data])
+        var query = client.query("SELECT * FROM flat_school JOIN flats ON(flat_school.id_flat = id_flat); WHERE id_school = $1", [data])
 
         query.on('row', function(row){
                 response[response.length] = row

@@ -1,2 +1,8 @@
 --
-address,capacity, occupation, price, description, sex_filter
+address, capacity, occupation, price, description, sex_filter
+
+var getId = client.query("SELECT COALESCE(MAX(id_user), 0) FROM users;")
+
+    getId.on('row', function(row){
+    idUsr = row.coalesce + 1
+})
