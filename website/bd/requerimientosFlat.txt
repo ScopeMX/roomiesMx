@@ -1,0 +1,6 @@
+address varchar
+capacity int
+occupation int
+price float
+description varchar
+sex_filter

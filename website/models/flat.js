@@ -141,12 +141,13 @@ flats.prototype.wantFlat = function(data, callback){
         query.on('row', function(row){})
 
         query.on('end', function(){
-                callback({
-                        agregado: true
-                })
+                var cambiar = client.query("UPDATE flats SET occupation = $1 WHERE id_flat")
                 client.end()
         })
 }
+
+
+flats.prototype.getOwnerFlats =
 
 
 module.exports = flats
